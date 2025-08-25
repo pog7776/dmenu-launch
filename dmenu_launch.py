@@ -33,7 +33,7 @@ import argparse
 import subprocess
 
 from collections import namedtuple
-from distutils.spawn import find_executable
+import shutil
 
 def main():
     check_req_utils()
@@ -47,7 +47,7 @@ def check_req_utils():
     """Checks if dmenu and other mandatory utilities can be found on target machine."""
     utils = (['dmenu', 'gpg', 'pass', 'xclip', 'exo-open', 'pkill'])
     for util in utils:
-        if find_executable(util) is None:
+        if shutil.which(util) is None:
             print("ERROR: Util '{}' is missing, install it before proceeding! Exiting!".format(util))
             sys.exit(1)
 
